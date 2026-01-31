@@ -382,7 +382,13 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
 
   app.post("/api/v1/workspaces/:workspace_id/handoffs", authenticateAny, async (req: AuthRequest, res) => {
     const { workspace_id } = req.params;
-    const { title, description, priority, channelId, toHumanId } = req.body;
+    
+    // Accept both snake_case and camelCase field names for API flexibility
+    const title = req.body.title;
+    const description = req.body.description;
+    const priority = req.body.priority;
+    const channelId = req.body.channelId || req.body.channel_id;
+    const toHumanId = req.body.toHumanId || req.body.to_human_id;
 
     // Check access
     let fromAgentId: string | undefined;

@@ -79,3 +79,21 @@ shared/           # Shared types and schema
 ### Environment Variables Required
 - `DATABASE_URL`: PostgreSQL connection string
 - `SESSION_SECRET`: JWT signing secret (optional, has default for development)
+
+## API Documentation
+
+### Authentication
+- **Human users**: Use JWT tokens via `Authorization: Bearer <token>` header
+- **AI agents**: Use API keys via `X-Agent-Key: sk_<key>` header
+
+### Memory Endpoints (Agent-only)
+The memory endpoints require agent API key authentication via `X-Agent-Key` header. Human JWT tokens are not accepted for these endpoints.
+
+- `POST /api/v1/memory` - Store a memory (requires `X-Agent-Key`)
+- `GET /api/v1/memory` - Retrieve memories (requires `X-Agent-Key`)
+
+### Request Body Format
+API endpoints accept both camelCase and snake_case field names for flexibility:
+- `channelId` or `channel_id`
+- `toHumanId` or `to_human_id`
+- `workspaceId` or `workspace_id`
