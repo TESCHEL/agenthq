@@ -1,0 +1,122 @@
+Here's your Replit Agent prompt:
+
+Build AgentHQ MVP from existing GitHub repo
+
+Import this repository: https://github.com/TESCHEL/agenthq
+
+This repo contains a complete spec for AgentHQ — an API-first collaboration platform for AI agents ("Slack meets Jira for AI agents"). The docs, types, and database schema are already defined. Your job is to implement the working application.
+
+What already exists in the repo (DO NOT regenerate):
+
+src/types/index.ts — TypeScript type definitions
+src/schema/database.sql — PostgreSQL schema (7 tables: workspaces, humans, agents, channels, messages, handoffs, memories)
+docs/API_SPEC.md — Complete REST API specification
+docs/ARCHITECTURE.md — System design decisions
+docs/DATA_MODEL.md — Database schema documentation
+Tech stack to use:
+
+Runtime: Node.js 20+
+Language: TypeScript (strict mode)
+Framework: Fastify (not Express — faster)
+ORM: Drizzle ORM (not Prisma — better performance)
+Database: Replit's built-in PostgreSQL via DATABASE_URL secret
+Cache/PubSub: Replit's built-in Redis via REDIS_URL secret
+Real-time: Socket.io
+Frontend: React with TypeScript
+Implementation tasks:
+
+Project setup
+Initialize Node.js/TypeScript project with Fastify
+Install dependencies: drizzle-orm, postgres, socket.io, @fastify/cors, @fastify/jwt, dotenv
+Configure tsconfig.json with strict mode
+Set up Drizzle to connect to DATABASE_URL
+Database
+Run the existing src/schema/database.sql against Replit PostgreSQL to create tables
+Create Drizzle schema file that mirrors the SQL schema (use the existing SQL as source of truth)
+Do NOT modify the table structure
+Authentication
+JWT auth for humans: Authorization: Bearer <JWT>
+API key auth for agents: X-Agent-Key: sk_...
+Middleware to extract and validate both auth types
+Generate API keys with sk_ prefix + 32 random chars
+REST API (implement all endpoints from docs/API_SPEC.md)
+
+Workspaces:
+
+GET /api/v1/workspaces — list workspaces for authenticated user
+Channels:
+
+GET /api/v1/workspaces/:workspace_id/channels
+POST /api/v1/workspaces/:workspace_id/channels
+Messages:
+
+GET /api/v1/channels/:channel_id/messages (with ?limit and ?before pagination)
+POST /api/v1/channels/:channel_id/messages
+Handoffs:
+
+GET /api/v1/workspaces/:workspace_id/handoffs (with ?status filter)
+POST /api/v1/workspaces/:workspace_id/handoffs
+PATCH /api/v1/handoffs/:handoff_id (status transitions: OPEN → IN_PROGRESS → RESOLVED)
+Memory:
+
+POST /api/v1/memory (store key/value for agent)
+GET /api/v1/memory?q=<query> (retrieve by key prefix or exact match)
+Real-time with Socket.io
+Connect Socket.io to Fastify server
+Use Redis adapter for pub/sub across instances
+Events to emit:
+message.created when POST /messages succeeds
+handoff.assigned when handoff created
+handoff.updated when handoff status changes
+Clients join rooms by channel_id or workspace_id
+React Dashboard (basic MVP)
+Create React frontend in /client directory
+Pages needed:
+Login page (email/password → JWT)
+Workspace selector
+Channel list sidebar
+Message feed (real-time via Socket.io)
+Handoff list with status badges (OPEN=yellow, IN_PROGRESS=blue, RESOLVED=green)
+Use Socket.io client to subscribe to updates
+Keep it simple — functionality over aesthetics
+Project structure:
+/src
+  /db
+    schema.ts        # Drizzle schema mirroring database.sql
+    index.ts         # Database connection
+  /routes
+    workspaces.ts
+    channels.ts
+    messages.ts
+    handoffs.ts
+    memory.ts
+    auth.ts
+  /middleware
+    auth.ts          # JWT + API key validation
+  /lib
+    redis.ts         # Redis client + pub/sub helpers
+    realtime.ts      # Socket.io setup
+  server.ts          # Fastify app entry point
+/client
+  /src
+    /components
+    /pages
+    App.tsx
+    main.tsx
+/docs                # Existing — don't modify
+
+Environment variables needed:
+
+DATABASE_URL (Replit PostgreSQL)
+REDIS_URL (Replit Redis)
+JWT_SECRET (generate a random string)
+Validation requirements:
+
+All endpoints return proper HTTP status codes (201 for creates, 404 for not found, 401/403 for auth errors)
+Messages are immutable — no PUT/DELETE endpoints
+Handoff status transitions must be valid (can't go from RESOLVED back to OPEN)
+API responses match the types in src/types/index.ts
+Start the server on port 3000. The React client should be served from the same port in production or proxy in development.
+
+Do not create placeholder or mock implementations. Build the real, working system.
+
