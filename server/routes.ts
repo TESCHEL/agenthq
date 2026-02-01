@@ -383,6 +383,15 @@ export async function registerRoutes(httpServer: Server, app: Express): Promise<
   app.post("/api/v1/workspaces/:workspace_id/handoffs", authenticateAny, async (req: AuthRequest, res) => {
     const { workspace_id } = req.params;
     
+    // Debug logging to diagnose request body issues
+    console.log('--- HANDOFF CREATE DEBUG ---');
+    console.log('Content-Type:', req.headers['content-type']);
+    console.log('Raw body:', req.body);
+    console.log('Body type:', typeof req.body);
+    console.log('Body keys:', Object.keys(req.body || {}));
+    console.log('Body stringified:', JSON.stringify(req.body));
+    console.log('--- END DEBUG ---');
+    
     // Accept both snake_case and camelCase field names for API flexibility
     const title = req.body.title;
     const description = req.body.description;
