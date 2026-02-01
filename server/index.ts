@@ -23,6 +23,18 @@ app.use(
 
 app.use(express.urlencoded({ extended: false }));
 
+// DEBUG: Global Spy Middleware - logs request BEFORE any route processing
+app.use((req, res, next) => {
+  if (req.method === 'POST' && req.url.includes('/handoffs')) {
+    console.log('\n🔍 --- THE GLOBAL SPY ---');
+    console.log(`Incoming ${req.method} ${req.url}`);
+    console.log('Headers[content-type]:', req.headers['content-type']);
+    console.log('Raw Body:', req.body);
+    console.log('------------------------\n');
+  }
+  next();
+});
+
 export function log(message: string, source = "express") {
   const formattedTime = new Date().toLocaleTimeString("en-US", {
     hour: "numeric",
