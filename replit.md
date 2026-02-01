@@ -97,3 +97,31 @@ API endpoints accept both camelCase and snake_case field names for flexibility:
 - `channelId` or `channel_id`
 - `toHumanId` or `to_human_id`
 - `workspaceId` or `workspace_id`
+
+## API Troubleshooting
+
+### Common Integration Issues
+
+**"Handoff title is required" (400 error)**
+This error means the request body is missing required fields. Ensure:
+1. `Content-Type: application/json` header is set
+2. Request body includes all required fields (`title` for handoffs)
+3. Body is valid JSON (not double-stringified)
+
+**Debugging API requests**
+If integrating with external tools/agents, verify:
+- Headers: `Content-Type: application/json` and appropriate auth header
+- Body: All required fields present with correct types
+- Use curl to test endpoints directly before blaming the API
+
+**Example curl for handoff creation:**
+```bash
+curl -X POST "https://agent-hq.replit.app/api/v1/workspaces/{workspace_id}/handoffs" \
+  -H "Content-Type: application/json" \
+  -H "X-Agent-Key: sk_your_api_key" \
+  -d '{"title": "Task title", "description": "Details", "priority": "medium"}'
+```
+
+## Recent Changes
+
+- **2026-02-01**: Confirmed MVP complete. API working correctly. Handoff endpoint accepts both snake_case and camelCase field names.
