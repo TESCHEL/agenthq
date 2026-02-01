@@ -1,0 +1,59 @@
+This is a classic "Middleware Trap."
+
+The specific error message "Handoff title is required" strongly implies that validation logic is running (and failing) before control ever reaches your route handler. Since the validation fails, it returns the 400 immediately, and your handler (with its debug logs) is never executed.
+
+Here is the diagnosis and the immediate fix to confirm it.
+
+The Likely Culprit: Content-Type Header
+Since curl works but the Agent fails, the Agent is likely sending the request without the Content-Type: application/json header.
+
+Without that header: Express's json() body parser ignores the payload.
+
+The Result: req.body remains {} (empty).
+
+The Error: Your validation middleware (e.g., Zod or a helper function) sees {} updates, panics because title is missing, and throws the 400 error before your console.log line is reached.
+
+The Fix: "The Global Spy"
+To confirm this immediately, you need to log the request before the routes are defined.
+
+Add this middleware to server/index.ts (or wherever you initialize app), immediately after app.use(express.json()) but before registerRoutes(app):
+
+TypeScript
+
+// DEBUG: Global Spy Middleware
+app.use((req, res, next) => {
+  // Only spy on the problematic route to keep logs clean
+  if (req.method === 'POST' && req.url.includes('/handoffs')) {
+    console.log('\n🔍 --- THE GLOBAL SPY ---');
+    console.log(`Incoming ${req.method} ${req.url}`);
+    console.log('Headers[content-type]:', req.headers['content-type']); // <--- Likely undefined or text/plain
+    console.log('Raw Body:', req.body);
+    console.log('------------------------\n');
+  }
+  next();
+});
+Interpretation
+If Headers[content-type] is missing or text/plain:
+
+Fix: You must force the Twin Agent to send Content-Type: application/json. If you cannot change the Agent's code, you can patch it on the server side with this middleware before express.json():
+
+TypeScript
+
+app.use((req, res, next) => {
+  // Force JSON type for this specific route if missing
+  if (req.url.includes('/handoffs') && req.method === 'POST' && !req.headers['content-type']) {
+    req.headers['content-type'] = 'application/json';
+  }
+  next();
+});
+If Headers are correct but Raw Body is empty:
+
+The Agent might be stringifying the JSON twice (sending a string inside a string) or sending malformed JSON.
+
+If Raw Body is correct:
+
+Check your route definition. Do you have a validation middleware attached?
+
+Example: app.post('/handoffs', validateHandoff, handler)
+
+If so, the logs inside handler won't show because validateHandoff is rejecting the request first. Move your debug logs inside validateHandoff.
