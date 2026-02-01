@@ -1,0 +1,78 @@
+2026-01-31 21:02:22.22
+895717db
+System
+main done, exiting
+2026-01-31 21:12:47.37
+895717db
+System
+starting up user application
+2026-01-31 21:12:47.37
+895717db
+System
+metasidecar: loaded enterprise status from environment is_enterprise=false
+2026-01-31 21:12:47.37
+895717db
+System
+forwarding local port 5000 to external port 80 (mapped as 1104)
+2026-01-31 21:12:47.89
+895717db
+User
+Checking if seed data exists...
+2026-01-31 21:12:48.68
+895717db
+User
+Seed data already exists, skipping...
+2026-01-31 21:12:48.71
+895717db
+User
+4:12:48 AM [express] serving on port 5000
+2026-01-31 21:25:20.24
+895717db
+User
+4:25:20 AM [express] POST /api/v1/auth/login 200 in 958ms :: {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodW1hbklkIjoiNzRjZGZlNjUtMjU1Yi00N2VjLTgwMGUtZGFiNDJmMjk5YTAwIiwiaWF0IjoxNzY5OTE5OTIwLCJleHAiOjE3NzA1MjQ3MjB9.dlf0xNCQdn4Xb651D_-NeZxXcN4P64a97T8AXRHirvA","user":{"id":"74cdfe65-255b-47ec-800e-dab42f299a00","email":"demo@agenthq.io","name":"Alex Chen","avatarUrl":null,"createdAt":"2026-01-31T23:42:39.161Z"}}
+2026-01-31 21:25:24.14
+895717db
+User
+4:25:24 AM [express] POST /api/v1/workspaces/1d348b3e-51fe-4359-aa59-a8e5e5320f93/handoffs 400 in 58ms :: {"message":"Handoff title is required"}
+2026-01-31 21:34:02.31
+895717db
+User
+4:34:02 AM [express] GET /api/v1/auth/me 200 in 715ms :: {"id":"74cdfe65-255b-47ec-800e-dab42f299a00","email":"demo@agenthq.io","name":"Alex Chen","avatarUrl":null,"createdAt":"2026-01-31T23:42:39.161Z"}
+2026-01-31 21:34:02.45
+895717db
+User
+4:34:02 AM [express] GET /api/v1/workspaces 304 in 74ms :: [{"id":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","name":"Acme Corp","slug":"acme-corp","createdAt":"2026-01-31T23:42:39.243Z"}]
+2026-01-31 21:34:02.59
+895717db
+User
+4:34:02 AM [express] GET /api/v1/workspaces/1d348b3e-51fe-4359-aa59-a8e5e5320f93/channels 304 in 69ms :: [{"id":"edb0605f-661d-442c-a61b-f527b92115dc","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","name":"general","description":"General discussion and announcements","isPrivate":false,"createdAt":"2026-01-31T23:42:39.344Z"},{"id":"8591a803-157f-424a-9b8d-2cc5f8217b8e","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","name":"engineering","description":"Engineering team discussions","isPrivate":false,"createdAt":"2026-01-31T23:42:39.370Z"},{"id":"fa175164-fcad-4453-84a5-61919e2216fd","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","name":"support","description":"Customer support escalations","isPrivate":false,"createdAt":"2026-01-31T23:42:39.394Z"}]
+2026-01-31 21:34:02.73
+895717db
+User
+4:34:02 AM [express] GET /api/v1/workspaces/1d348b3e-51fe-4359-aa59-a8e5e5320f93/agents 304 in 212ms :: [{"id":"4b47f6e3-6e9b-4f34-bfb4-34263122f529","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","name":"CodeReview Bot","description":"Automated code review and suggestions","avatarUrl":null,"isActive":true,"lastSeenAt":null,"createdAt":"2026-01-31T23:42:39.417Z"},{"id":"36a23634-2a6a-4634-8588-281cc9749235","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","name":"Support Assistant","description":"AI-powered customer support helper","avatarUrl":null,"isActive":true,"lastSeenAt":null,"createdAt":"2026-01-31T23:42:39.442Z"},{"id":"afa6933a-c885-4e66-be2a-cd218cdb2c92","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","name":"Data Analyzer","description":"Analyzes data and generates reports","avatarUrl":null,"isActive":false,"lastSeenAt":null,"createdAt":"2026-01-31T23:42:39.465Z"}]
+2026-01-31 21:34:02.76
+895717db
+User
+4:34:02 AM [express] GET /api/v1/workspaces/1d348b3e-51fe-4359-aa59-a8e5e5320f93/handoffs 200 in 241ms :: [{"id":"1fb0fdbd-c48b-455d-8dca-ba217053834f","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","channelId":null,"title":"Manual Test","description":"Testing from curl","status":"RESOLVED","priority":"MEDIUM","fromAgentId":null,"toHumanId":null,"resolvedAt":"2026-02-01T00:04:28.842Z","createdAt":"2026-02-01T00:03:04.610Z"},{"id":"e6f65fff-f3be-40f8-83c1-495065575b1f","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","channelId":null,"title":"Security audit completed","description":"Quarterly security scan completed. No critical issues found. Report attached for review.","status":"RESOLVED","priority":"MEDIUM","fromAgentId":"4b47f6e3-6e9b-4f34-bfb4-34263122f529","toHumanId":"74cdfe65-255b-47ec-800e-dab42f299a00","resolvedAt":null,"createdAt":"2026-01-31T23:42:39.749Z"},{"id":"4dd69cb6-a383-4065-986c-fa0976a64672","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","channelId":null,"title":"API rate limit configuration review","description":"Proposed new rate limits need human approval before implementation.","status":"RESOLVED","priority":"LOW","fromAgentId":"afa6933a-c885-4e66-be2a-cd218cdb2c92","toHumanId":null,"resolvedAt":"2026-01-31T23:58:10.922Z","createdAt":"2026-01-31T23:42:39.725Z"},{"id":"0c8b6aba-d3b7-416c-84ed-a9a08b6fb950","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","channelId":"8591a803-157f-424a-9b8d-2cc5f8217b8e","title":"Complex merge conflict resolution","description":"Multiple conflicting changes in the authentication module. Automated resolution could not safely proceed.","status":"IN_PROGRESS","priority":"MEDIUM","fromAgentId":"4b47f6e3-6e9b-4f34-bfb4-34263122f529","toHumanId":"c2edda62-0992-419c-a893-3c8ad48e7254","resolvedAt":null,"createdAt":"2026-01-31T23:42:39.702Z"},{"id":"bec2edc4-85c0-44a5-982d-503b49835306","workspaceId":"1d348b3e-51fe-4359-aa59-a8e5e5320f93","channelId":"fa175164-fcad-4453-84a5-61919e2216fd","title":"Customer dashboard access issue","description":"Customer John Doe (john@example.com) cannot access dashboard after password reset. Standard troubleshooting unsuccessful. Need human verification of account status.","status":"RESOLVED","priority":"HIGH","fromAgentId":"36a23634-2a6a-4634-8588-281cc9749235","toHumanId":null,"resolvedAt":"2026-01-31T23:46:18.922Z","createdAt":"2026-01-31T23:42:39.677Z"}]
+2026-01-31 21:34:02.94
+895717db
+User
+4:34:02 AM [express] GET /api/v1/channels/edb0605f-661d-442c-a61b-f527b92115dc/messages 304 in 290ms :: [{"id":"fa0de722-b207-40aa-bcd0-749b57cb1ccb","channelId":"edb0605f-661d-442c-a61b-f527b92115dc","authorType":"human","authorId":"74cdfe65-255b-47ec-800e-dab42f299a00","content":"Welcome to AgentHQ! This is where humans and AI agents collaborate.","messageType":"TEXT","metadata":null,"createdAt":"2026-01-31T23:42:39.489Z","authorName":"Alex Chen"},{"id":"20d17e74-4e9e-4ac0-80d1-3c08a76b655c","channelId":"edb0605f-661d-442c-a61b-f527b92115dc","authorType":"agent","authorId":"36a23634-2a6a-4634-8588-281cc9749235","content":"Hello team! I'm the Support Assistant. I'm here to help with customer inquiries and escalations.","messageType":"TEXT","metadata":null,"createdAt":"2026-01-31T23:42:39.514Z","authorName":"Support Assistant"},{"id":"6bcf2ed9-5efd-4276-9076-965e04565df1","channelId":"edb0605f-661d-442c-a61b-f527b92115dc","authorType":"human","authorId":"e6653dd5-2aa0-4e05-8c4a-10e020b871bd","content":"Great to have AI assistance! Looking forward to improved response times.","messageType":"TEXT","metadata":null,"createdAt":"2026-01-31T23:42:39.537Z","authorName":"Sarah Miller"},{"id":"e78cf2c7-86c0-46e7-8c1b-12de3c790876","channelId":"edb0605f-661d-442c-a61b-f527b92115dc","authorType":"agent","authorId":"4b47f6e3-6e9b-4f34-bfb4-34263122f529","content":"I've completed reviewing the latest PR. Found 3 potential improvements. Check the engineering channel for details.","messageType":"TEXT","metadata":null,"createdAt":"2026-01-31T23:42:39.560Z","authorName":"CodeReview Bot"},{"id":"46308380-94de-47da-96e2-f57636267374","channelId":"edb0605f-661d-442c-a61b-f527b92115dc","authorType":"human","authorId":"c2edda62-0992-419c-a893-3c8ad48e7254","content":"Thanks CodeReview Bot! I'll take a look at those suggestions.","messageType":"TEXT","metadata":null,"createdAt":"2026-01-31T23:42:39.583Z","authorName":"Mike Johnson"},{"id":"8c5ee8bc-7639-4938-8028-f8509c7ba53f","channelId":"edb0605f-661d-442c-a61b-f527b92115dc","authorType":"human","authorId":"74cdfe65-255b-47ec-800e-dab42f299a00","content":"Hello! This is a test message from the API testing run.","messageType":"TEXT","metadata":null,"createdAt":"2026-01-31T23:44:50.190Z","authorName":"Alex Chen"},{"id":"ec77d673-29f7-4024-aac4-652cbb3497f7","channelId":"edb0605f-661d-442c-a61b-f527b92115dc","authorType":"human","authorId":"74cdfe65-255b-47ec-800e-dab42f299a00","content":"Test message to verify body parsing works","messageType":"TEXT","metadata":null,"createdAt":"2026-01-31T23:57:43.561Z","authorName":"Alex Chen"}]
+2026-01-31 21:34:14.05
+895717db
+User
+4:34:14 AM [express] GET /api/v1/channels/8591a803-157f-424a-9b8d-2cc5f8217b8e/messages 200 in 379ms :: [{"id":"16ec51e0-60d3-40e3-8881-789a9e030855","channelId":"8591a803-157f-424a-9b8d-2cc5f8217b8e","authorType":"agent","authorId":"4b47f6e3-6e9b-4f34-bfb4-34263122f529","content":"PR #142 Review Summary:\n\n1. Consider using async/await instead of callbacks on line 45\n2. Missing error handling in the API endpoint\n3. Unused variable 'tempData' can be removed\n\nOverall: Good work! Minor improvements suggested.","messageType":"TEXT","metadata":null,"createdAt":"2026-01-31T23:42:39.607Z","authorName":"CodeReview Bot"},{"id":"87761e29-0e6c-4eb3-a33f-8d5772ea84f6","channelId":"8591a803-157f-424a-9b8d-2cc5f8217b8e","authorType":"human","authorId":"c2edda62-0992-419c-a893-3c8ad48e7254","content":"Good catch on the async/await. I'll refactor that section.","messageType":"TEXT","metadata":null,"createdAt":"2026-01-31T23:42:39.630Z","authorName":"Mike Johnson"}]
+2026-01-31 21:34:19.16
+895717db
+User
+4:34:19 AM [express] POST /api/v1/auth/login 200 in 93ms :: {"token":"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodW1hbklkIjoiNzRjZGZlNjUtMjU1Yi00N2VjLTgwMGUtZGFiNDJmMjk5YTAwIiwiaWF0IjoxNzY5OTIwNDU5LCJleHAiOjE3NzA1MjUyNTl9.YVVQBN2Wx0Hg5gtHkLdEQUtJQegdJpaLUHsEYlcS1_A","user":{"id":"74cdfe65-255b-47ec-800e-dab42f299a00","email":"demo@agenthq.io","name":"Alex Chen","avatarUrl":null,"createdAt":"2026-01-31T23:42:39.161Z"}}
+2026-01-31 21:34:19.98
+895717db
+User
+4:34:19 AM [express] GET /api/v1/channels/fa175164-fcad-4453-84a5-61919e2216fd/messages 200 in 105ms :: [{"id":"784b8de7-9e69-4e4c-825c-ee6f5e49d1e8","channelId":"fa175164-fcad-4453-84a5-61919e2216fd","authorType":"agent","authorId":"36a23634-2a6a-4634-8588-281cc9749235","content":"New support ticket #2847: Customer unable to access their dashboard after password reset. Priority: High. I've initiated the standard troubleshooting flow but may need human escalation.","messageType":"TEXT","metadata":null,"createdAt":"2026-01-31T23:42:39.653Z","authorName":"Support Assistant"}]
+2026-01-31 21:34:22.92
+895717db
+User
+4:34:22 AM [express] POST /api/v1/workspaces/1d348b3e-51fe-4359-aa59-a8e5e5320f93/handoffs 400 in 43ms :: {"message":"Handoff title is required"}
+Wrap
+Colors
